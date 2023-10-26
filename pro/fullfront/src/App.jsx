@@ -1,35 +1,34 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/js/bootstrap.bundle.min.js"
-import Menu from './components/menu'
 import { BrowserRouter, Route, Routes} from 'react-router-dom'
-import Princ from './components/logins/princ'
-import Proctor from './components/logins/proctor'
-import Hod from './components/logins/hod'
-import StudentLogin from './components/logins/student'
-import Parent from './components/logins/parent'
+import Login from './components/login'
+import HOD from './components/pages/hodpage'
+import Princpage from './components/pages/princpage'
+import Staffpage from './components/pages/staffpage'
+import Parentpage from './components/pages/parentpage'
+import Studpage from './components/pages/studpage'
 const App = () => {
+    let [id, setid] = useState('');
+    const callback = (data) =>{
+        setid(data);
+    }
+    useEffect(()=>{
+        console.log(id);
+    }, [id]);
     return (
-        <div className='container-md p-5'>
-            <div className="row">
-                <div className="col-md"><h1 className='text-center text-danger mb-5'>Login as</h1></div>
-            </div>
-            <div className="row mx-auto">
-                <div className="col-md d-flex justify-content-center align-items-center flex-column">
-                    <BrowserRouter>
-                        <Menu />
-                        <Routes>
-                            {/* <Route path='/' element={<StudentLogin />} /> */}
-                            <Route path='/logins/princ' element={<Princ/>} />
-                            <Route path='/logins/hod' element={<Hod />} />
-                            <Route path='/logins/proctor' element={<Proctor />} />
-                            <Route path='/logins/parent' element={<Parent />} />
-                            <Route path='/logins/student' element={<StudentLogin />} />
-                        </Routes>
-                    </BrowserRouter>
-                </div>   
-            </div>
-        </div>
+        <>
+            <BrowserRouter>
+                <Routes>
+                    <Route path='*' element={<Login call={callback}/>} />
+                    <Route path='/pages/hodpage/*' element={<HOD cid={id} />} />
+                    <Route path='/pages/princpage/*' element={<Princpage cid={id} />} />
+                    <Route path='/pages/parentpage/*' element={<Parentpage cid={id} />} />
+                    <Route path='/pages/staffpage/*' element={<Staffpage cid={id} />} />
+                    <Route path='/pages/studpage/*' element={<Studpage cid={id} />} />
+                </Routes>
+            </BrowserRouter>
+        </>
     )
 }
 export default App;
