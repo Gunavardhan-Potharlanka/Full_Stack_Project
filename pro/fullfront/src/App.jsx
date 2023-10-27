@@ -9,23 +9,26 @@ import Staffpage from './components/pages/staffpage'
 import Parentpage from './components/pages/parentpage'
 import Studpage from './components/pages/studpage'
 const App = () => {
-    let [id, setid] = useState('');
-    const callback = (data) =>{
-        setid(data);
+    if(localStorage.getItem('loggedinuser') == null){
+        localStorage.setItem('loggedinuser', JSON.stringify({
+            isloggedin: false,
+            position: '',
+            fname: '',
+            lname: '',
+            id: ''
+        }));
     }
-    useEffect(()=>{
-        console.log(id);
-    }, [id]);
+    console.log(localStorage.getItem('loggedinuser'));
     return (
         <>
             <BrowserRouter>
                 <Routes>
-                    <Route path='*' element={<Login call={callback}/>} />
-                    <Route path='/pages/hodpage/*' element={<HOD cid={id} />} />
-                    <Route path='/pages/princpage/*' element={<Princpage cid={id} />} />
-                    <Route path='/pages/parentpage/*' element={<Parentpage cid={id} />} />
-                    <Route path='/pages/staffpage/*' element={<Staffpage cid={id} />} />
-                    <Route path='/pages/studpage/*' element={<Studpage cid={id} />} />
+                    <Route path='*' element={<Login />} />
+                    <Route path='/pages/hodpage/*' element={<HOD />} />
+                    <Route path='/pages/princpage/*' element={<Princpage />} />
+                    <Route path='/pages/parentpage/*' element={<Parentpage />} />
+                    <Route path='/pages/staffpage/*' element={<Staffpage />} />
+                    <Route path='/pages/studpage/*' element={<Studpage />} />
                 </Routes>
             </BrowserRouter>
         </>

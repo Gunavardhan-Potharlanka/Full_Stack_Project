@@ -6,14 +6,7 @@ import Hod from './logins/hod'
 import StudentLogin from './logins/student'
 import Parent from './logins/parent'
 import Menu from './menu'
-const Login = (props) => {
-  const [ids, setids] = useState('');
-  const callback = (data) =>{
-      setids(data);
-  }
-  useEffect(()=>{
-    props.call(ids);
-  }, [ids]);
+const Login = () => {
   return (
     <div className='container-md p-5'>
         <div className="row">
@@ -23,17 +16,15 @@ const Login = (props) => {
             <div className="col-md d-flex justify-content-center align-items-center flex-column">
                     <Menu />
                     <Routes>
-                        {/* <Route path='/' element={<StudentLogin />} /> */}
-                        <Route path='/logins/princ' element={<Princ call={callback}/>} />
-                        <Route path='/logins/hod' element={<Hod call={callback} />} />
-                        <Route path='/logins/proctor' element={<Proctor call={callback} />} />
-                        <Route path='/logins/parent' element={<Parent call={callback} />} />
-                        <Route path='/logins/student' element={<StudentLogin call={callback} />} />
+                        <Route path='/logins/princ' element={<Princ />} />
+                        <Route path='/logins/hod' element={<Hod />} />
+                        <Route path='/logins/proctor' element={<Proctor />} />
+                        <Route path='/logins/parent' element={<Parent />} />
+                        <Route path='/logins/student' element={<StudentLogin />} />
                     </Routes>
             </div>   
         </div>
     </div>
   )
 }
-
 export default Login

@@ -1,16 +1,14 @@
 import { useState, useEffect } from 'react'
 import { Link, Navigate } from 'react-router-dom'
 import axios from 'axios';
-const Hod = (props) => {
+const Hod = () => {
     const [permit, setpermit] = useState(false);
     const [usr, setusr] = useState({uname:'', pswd:''});
     const [msg, setmsg] = useState('');
-    const [ids, setids] = useState('');
-
+    
     useEffect(()=>{
-        props.call(ids);
-        if(ids!='') setpermit(true);
-    }, [ids]);
+        setpermit(JSON.parse(localStorage.getItem('loggedinuser')).isloggedin);
+    }, [localStorage.getItem('loggedinuser')]);
 
     useEffect(()=>{
         setmsg('');
@@ -22,8 +20,15 @@ const Hod = (props) => {
                 setmsg('Invalid username or password');
             }
             else{
-                if(usr.pswd==='password'){
-                    setids(res.data[0].eid);
+                if(usr.pswd ==='password'){
+                    localStorage.setItem('loggedinuser', JSON.stringify({
+                        isloggedin: true,
+                        position: 'HOD',
+                        fname: res.data[0].fname,
+                        lname: res.data[0].lname,
+                        id: res.data[0].eid
+                    }));
+                    window.location.reload();
                 }
                 else setmsg('Invalid username or password');
             }
@@ -32,7 +37,7 @@ const Hod = (props) => {
 
     
     if(permit){  
-        return <Navigate to="../pages/hodpage" />
+        return <Navigate to="../pages/hodpage" />   
     }
     else{
         return (
