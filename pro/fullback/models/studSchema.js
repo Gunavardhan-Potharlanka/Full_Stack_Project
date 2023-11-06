@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
-const HOD = new mongoose.Schema({
-    eid:{
-        type:String,
+const Stud = new mongoose.Schema({
+    adm:{
+        type:Number,
         required:true
     },
-    dt:{
+    dte:{
         type:String,
         required:true
     },
@@ -16,26 +16,42 @@ const HOD = new mongoose.Schema({
         type:String,
         required:true
     },
-    mail:{
+    mble:{
+        type:Number,
+        required:true
+    },
+    dob:{
         type:String,
         required:true
     },
-    mble:{
-        type:Number,
+    dad:{
+        type:String,
+        required:true
+    },
+    mom:{
+        type:String,
+        required:true
+    },
+    mail:{
+        type:String,
         required:true
     },
     branch:{
         type:String,
         required:true
     },
-    edu:{
+    roll:{
         type:String,
         required:true
     },
     passwd:{
         type:String,
         required:true
+    },
+    text:{
+        type:String,
+        required:true
     }
 })
 
-export default mongoose.model('Hod',HOD);
+export default mongoose.model('student',Stud);

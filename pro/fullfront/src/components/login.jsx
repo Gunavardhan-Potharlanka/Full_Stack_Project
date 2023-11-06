@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Princ from './logins/princ'
 import Proctor from './logins/proctor'
@@ -27,4 +26,4 @@ const Login = () => {
     </div>
   )
 }
-export default Login
+export default Login;
