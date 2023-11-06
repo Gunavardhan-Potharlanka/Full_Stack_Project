@@ -1,6 +1,4 @@
 import React from "react"
-import "bootstrap/dist/css/bootstrap.min.css"
-import "bootstrap/dist/js/bootstrap.bundle.min.js"
 import { BrowserRouter, Navigate, Route, Routes} from 'react-router-dom'
 import Login from './components/login'
 import HOD from './components/pages/hodpage'
