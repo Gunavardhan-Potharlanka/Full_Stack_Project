@@ -3,6 +3,8 @@ import { Routes, Route, Link, Navigate } from 'react-router-dom';
 import Hodash from './dashboards/hodash';
 import Hodprofile from './profiles/hodprofile';
 import Addstud from '../forms/addstudform';
+import Viewstuds from '../forms/viewstuds';
+import Rmstuds from '../forms/rmstuds';
 const HOD = () => {
     const [permit, setpermit] = useState(false);
     
@@ -36,8 +38,8 @@ const HOD = () => {
                             </button>
                             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <li><Link className='dropdown-item text-decoration-none' to={'forms/addstud'}>Add Student</Link></li>
-                                <li><Link className='dropdown-item text-decoration-none' to={'./logins/hod'}>View Students</Link></li>
-                                <li><Link className='dropdown-item text-decoration-none' to={'./logins/proctor'}>Remove Student</Link></li>
+                                <li><Link className='dropdown-item text-decoration-none' to={'forms/viewstuds'}>View Students</Link></li>
+                                <li><Link className='dropdown-item text-decoration-none' to={'forms/rmstuds'}>Remove Student</Link></li>
                             </ul>
                         </div>
                         <div className="col-md-12 card p-2 mb-1" role='button'>Staff</div>
@@ -49,6 +51,8 @@ const HOD = () => {
                     <Route path='/' element={<Hodash />} />
                     <Route path='/profiles/hodprofile' element={<Hodprofile />} />
                     <Route path='/forms/addstud' element={<Addstud />}/>
+                    <Route path='/forms/viewstuds' element={<Viewstuds />} />
+                    <Route path='/forms/rmstuds' element={<Rmstuds />} />
                 </Routes>
             </div>
         </div>

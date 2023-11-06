@@ -58,3 +58,39 @@ app.use('/studlogdetails/:id', async(req, res)=>{
         res.send(users);
     }
 });
+
+app.get('/studs', async(req, res)=>{
+    let students;
+    try{
+        students = await studSchema.find();
+    }catch(err){
+        console.log(err);
+    }
+    if(!students) res.send("Couldn't find");
+    else res.send(students);
+})
+
+app.get('/studbyid/:id', async(req, res)=>{
+    let student;
+    let id = req.params.id;
+    try{
+        student = await studSchema.find({roll:id});
+        console.log(student);
+    }catch(err){
+        console.log(err);
+    }
+    if(!student.length) res.send("Couldn't find");
+    else res.send(student);
+});
+
+app.delete('/rmstudentbyid/:id', async(req, res)=>{
+    let id = req.params.id;
+    let student;
+    try{
+        student = await studSchema.findOneAndDelete({roll:id});
+    }catch(err){
+        console.log(err);
+    }
+    console.log(student);
+    res.send('Done');
+});
