@@ -3,7 +3,7 @@ import { Routes, Route, Link, Navigate } from 'react-router-dom';
 import Hodash from './dashboards/hodash';
 import Hodprofile from './profiles/hodprofile';
 import Addstud from '../forms/addstudform';
-import Viewstuds from '../forms/viewstuds';
+import Viewstuds from '../views/viewstuds';
 import Rmstuds from '../forms/rmstuds';
 const HOD = () => {
     const [permit, setpermit] = useState(false);
@@ -29,8 +29,8 @@ const HOD = () => {
             <div className="row d-flex justify-content-center">
                 <div className="col-md-2 mx-3">
                     <div className="row" id='navbar'>
-                        <div className="col-md-12 card p-2 mb-1" role='button'><Link to={'/pages/hodpage'}>Dashboard</Link></div>
-                        <div className="col-md-12 card p-2 mb-1" role='button'><Link to={'profiles/hodprofile'}>Profile</Link></div>
+                        <div className="col-md-12 card p-2 mb-1" role='button'><Link className='text-decoration-none' to={'/pages/hodpage'}>Dashboard</Link></div>
+                        <div className="col-md-12 card p-2 mb-1" role='button'><Link className='text-decoration-none' to={'profiles/hodprofile'}>Profile</Link></div>
                         <div className="col-md-12 card p-2 mb-1" role='button'>Leaves</div>
                         <div className="col-md-12 card p-0 mb-1" role='button'>
                             <button className="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -44,14 +44,14 @@ const HOD = () => {
                         </div>
                         <div className="col-md-12 card p-2 mb-1" role='button'>Staff</div>
                         <div className="col-md-12 card p-2 mb-1" role='button'>Change Password</div>
-                        <div className="col-md-12 card p-2 mb-1" role='button' onClick={setLogout}>Logout</div>
+                        <div className="col-md-12 card p-2 mb-1 text-danger" role='button' onClick={setLogout}>Logout</div>
                     </div>
                 </div>
                 <Routes>
                     <Route path='/' element={<Hodash />} />
                     <Route path='/profiles/hodprofile' element={<Hodprofile />} />
-                    <Route path='/forms/addstud' element={<Addstud />}/>
-                    <Route path='/forms/viewstuds' element={<Viewstuds />} />
+                    <Route path='/forms/addstud' element={<Addstud dept={JSON.parse(localStorage.getItem('loggedinuser')).branch} />}/>
+                    <Route path='/forms/viewstuds' element={<Viewstuds dept={JSON.parse(localStorage.getItem('loggedinuser')).branch} />} />
                     <Route path='/forms/rmstuds' element={<Rmstuds />} />
                 </Routes>
             </div>

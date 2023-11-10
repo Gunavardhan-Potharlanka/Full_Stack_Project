@@ -1,13 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
-const Viewstuds = () => {
+const Viewstuds = (props) => {
     const [studs, studlist] = useState([]);
-
+    console.log(props.dept)
     useEffect(()=>{
-        axios.get('http://localhost:5000/studs').then((res)=>{
+        axios.get('http://localhost:5000/studs/'+props.dept).then((res)=>{
             studlist(res.data);
-            console.log(studs);
         });
     }, [studs]);
 
@@ -23,6 +22,7 @@ const Viewstuds = () => {
                     <th className='border border-1 p-2'>Email</th>
                     <th className='border border-1 p-2'>Father's Name</th>
                     <th className='border border-1 p-2'>Mother's Name</th>
+                    <th className='border border-1 p-2'>Branch</th>
                     {
                         studs.map((ele)=>{
                             return(
@@ -34,6 +34,7 @@ const Viewstuds = () => {
                                     <td className='border border-1 p-2'>{ele.mail}</td>
                                     <td className='border border-1 p-2'>{ele.dad}</td>
                                     <td className='border border-1 p-2'>{ele.mom}</td>
+                                    <td className='border border-1 p-2'>{ele.branch}</td>
                                 </tr>
                             )
                         })

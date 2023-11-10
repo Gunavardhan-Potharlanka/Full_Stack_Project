@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
-const Addstud = () => {
+const Addstud = (props) => {
     const [studdata,setstuddata] = useState({adm:'',dte:'',fname:'',lname:'',mble:'',dob:'',dad:'',mom:'',mail:'',branch:'',roll:'',passwd:'',text:''});
     
     const handleStud = (e) => {
@@ -88,7 +88,7 @@ const Addstud = () => {
                             <label className='col-form-label'>Branch</label>
                         </div>
                         <div className="col-md-4">
-                            <input className='form-control' type='tel' value={studdata.branch} onChange={(e) => setstuddata({...studdata, branch:e.target.value})} required/>
+                            <input className='form-control' type='tel' value={props.dept} onChange={(e) => setstuddata({...studdata, branch:e.target.value})} required/>
                         </div>
                     </div>
                     <div className="row">
