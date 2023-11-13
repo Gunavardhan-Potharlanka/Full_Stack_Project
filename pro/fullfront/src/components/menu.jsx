@@ -10,7 +10,7 @@ const Menu = () => {
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <li><Link className='dropdown-item text-decoration-none' to={'./logins/princ'}>Prinicipal</Link></li>
                 <li><Link className='dropdown-item text-decoration-none' to={'./logins/hod'}>Head of Department</Link></li>
-                <li><Link className='dropdown-item text-decoration-none' to={'./logins/proctor'}>Proctor</Link></li>
+                <li><Link className='dropdown-item text-decoration-none' to={'./logins/proctor'}>Staff</Link></li>
             </ul>
         </div>
         <div className="dropdown">

@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import axios from 'axios';
 const Addstud = (props) => {
-    const [studdata,setstuddata] = useState({adm:'',dte:'',fname:'',lname:'',mble:'',dob:'',dad:'',mom:'',mail:'',branch:'',roll:'',passwd:'',text:''});
-    
+    const [staff, setst] = useState([{fname:'', lname:''}]);
+    useEffect(()=>{
+        axios.get('http://localhost:5000/staff/'+JSON.parse(localStorage.getItem('loggedinuser')).branch).then(res=>{
+            if(res.data.length) setst(res.data);
+            console.log(staff);
+        })
+    })
+    const [studdata,setstuddata] = useState({adm:'',dte:'',fname:'',lname:'',mble:'',dob:'',dad:'',mom:'',mail:'',branch:props.dept,roll:'',proc:staff[0].fname+' '+staff[0].lname,passwd:'',text:''});
     const handleStud = (e) => {
             e.preventDefault()
             console.log(studdata)
@@ -11,7 +17,7 @@ const Addstud = (props) => {
                 .then((res) => {
                 console.log(res.data);
                 alert('Student added successfully');
-                setstuddata({adm:'',dte:'',fname:'',lname:'',mble:'',dob:'',dad:'',mom:'',mail:'',branch:'',roll:'',passwd:'',text:''});
+                setstuddata({adm:'',dte:'',fname:'',lname:'',mble:'',dob:'',dad:'',mom:'',mail:'',branch:props.dept,roll:'',proc:'',passwd:'',text:''});
             })
     }
 
@@ -88,10 +94,10 @@ const Addstud = (props) => {
                             <label className='col-form-label'>Branch</label>
                         </div>
                         <div className="col-md-4">
-                            <input className='form-control' type='tel' value={props.dept} onChange={(e) => setstuddata({...studdata, branch:e.target.value})} required/>
+                            <input className='form-control' type='tel' value={studdata.branch} onChange={(e) => setstuddata({...studdata, branch:e.target.value})} required/>
                         </div>
                     </div>
-                    <div className="row">
+                    <div className="row mb-2">
                         <div className="col-md-2">
                             <label className='col-form-label'>Roll Number</label>
                         </div>
@@ -103,6 +109,20 @@ const Addstud = (props) => {
                         </div>
                         <div className="col-md-4">
                             <input className='form-control' type='password' value={studdata.passwd} onChange={(e) => setstuddata({...studdata, passwd:e.target.value})} required/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-2">
+                            <label className='col-form-label'>Proctor</label>
+                        </div>
+                        <div className="col-md-4">
+                            <select className='form-control' type='password' value={studdata.proc} onChange={(e) => setstuddata({...studdata, proc:e.target.value})} required>
+                                {
+                                    staff.map((ele)=>{
+                                        return <option key={ele.fname} value={ele.fname+' '+ele.lname}>{ele.fname+' '+ele.lname}</option>
+                                    })
+                                }
+                            </select>
                         </div>
                     </div>
                     <label>Address</label><br />

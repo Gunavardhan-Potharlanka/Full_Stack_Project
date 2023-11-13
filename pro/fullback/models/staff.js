@@ -1,37 +1,41 @@
 import mongoose from "mongoose";
-const leave = new mongoose.Schema({
-    lt:{
+const Staff = new mongoose.Schema({
+    eid:{
         type:String,
         required:true
     },
-    from:{
+    dt:{
         type:String,
         required:true
     },
-    to:{
+    fname:{
         type:String,
         required:true
     },
-    desc:{
+    lname:{
         type:String,
         required:true
     },
-    roll:{
+    mail:{
         type:String,
         required:true
     },
-    name:{
+    mble:{
         type:String,
         required:true
     },
-    branch:{
+    dept:{
         type:String,
         required:true
     },
-    status:{
+    edu:{
+        type:String,
+        required:true
+    },
+    passwd:{
         type:String,
         required:true
     }
 })
 
-export default mongoose.model('dashhod',leave);
+export default mongoose.model('Staff',Staff);

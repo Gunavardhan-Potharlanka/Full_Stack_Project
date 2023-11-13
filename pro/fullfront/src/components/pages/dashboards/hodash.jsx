@@ -4,10 +4,18 @@ const Hodash = () => {
   const [leaves, set] = useState([]);
   useEffect(()=>{
     axios.get('http://localhost:5000/leavedet/'+JSON.parse(localStorage.getItem('loggedinuser')).branch).then(res=>{
-        console.log(res.data);
         set(res.data);
     });
   });
+  const update = async(val, roll)=>{
+    let msg=''
+    if(val==1) msg='approved';
+    else msg='declined';
+    await axios.post('http://localhost:5000/lvstatus', {roll, msg}).then(res=>{
+        alert('Leave '+msg);
+    });
+    // window.location.reload();
+  }
   return (
     <div className="col-md-9">
         {/* <div className="row p-0 mb-2">
@@ -34,8 +42,8 @@ const Hodash = () => {
                                         <td scope='row' className='border border-1 p-2'>{ele.roll}</td>
                                         <td className='border border-1 p-2'>{ele.name}</td>
                                         <td className='border border-1 p-2'>{ele.lt}</td>
-                                        <td className='border border-1 p-2'><button className='btn btn-primary rounded text-success'>Approve</button></td>
-                                        <td className='border border-1 p-2'><button className='btn btn-primary rounded text-danger'>Decline</button></td>
+                                        <td className='border border-1 p-2'><button onClick={()=>update(1, ele.roll)} className='btn btn-primary p-2 rounded text-success'>Approve</button></td>
+                                        <td className='border border-1 p-2'><button onClick={()=>update(0, ele.roll)} className='btn btn-primary p-2 rounded text-danger'>Decline</button></td>
                                     </tr>
                                 )
                             })
@@ -49,4 +57,4 @@ const Hodash = () => {
   )
 }
 
-export default Hodash
+export default Hodash;

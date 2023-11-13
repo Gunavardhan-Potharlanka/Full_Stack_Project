@@ -1,37 +1,33 @@
 import mongoose from "mongoose";
-const leave = new mongoose.Schema({
-    lt:{
+const prince = new mongoose.Schema({
+    fname:{
         type:String,
         required:true
     },
-    from:{
+    lname:{
         type:String,
         required:true
     },
-    to:{
+    mble:{
+        type:Number,
+        required:true
+    },
+    mail:{
         type:String,
         required:true
     },
-    desc:{
+    pid:{
+        type:Number,
+        required:true
+    },
+    edu:{
         type:String,
         required:true
     },
-    roll:{
-        type:String,
-        required:true
-    },
-    name:{
-        type:String,
-        required:true
-    },
-    branch:{
-        type:String,
-        required:true
-    },
-    status:{
+    passwd:{
         type:String,
         required:true
     }
 })
 
-export default mongoose.model('dashhod',leave);
+export default mongoose.model('principal',prince);

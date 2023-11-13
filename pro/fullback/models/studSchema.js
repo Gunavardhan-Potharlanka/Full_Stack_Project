@@ -44,6 +44,10 @@ const Stud = new mongoose.Schema({
         type:String,
         required:true
     },
+    proc:{
+        type:String,
+        required:true
+    },
     passwd:{
         type:String,
         required:true
