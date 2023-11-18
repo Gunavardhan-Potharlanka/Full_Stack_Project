@@ -6,6 +6,7 @@ import hodSchema from "./models/hodSchema";
 import studSchema from "./models/studSchema";
 import leaveapps from "./models/leaveapps";
 import staff from "./models/staff";
+import prinicipal from "./models/prinicipal";
 import nodemailer from 'nodemailer';
 import session from "express-session";
 const app = express();
@@ -181,7 +182,7 @@ app.get('/staff/:id', async(req, res)=>{
     let id = req.params.id;
     let st;
     try{
-        st = await staff.find({dept:id}, {fname:1, lname:1, _id:0});
+        st = await staff.find({dept:id});
     }catch(err){
         console.log(err);
     }
@@ -207,4 +208,88 @@ app.use('/stafflogdetails/:id', async(req, res)=>{
     }
     if(stf) res.send(stf);
     else res.send("");
-})
+});
+
+app.use('/staffbyid/:id', async(req, res)=>{
+    let student;
+    let id = req.params.id;
+    try{
+        student = await staff.find({eid:id});
+    }catch(err){
+        console.log(err);
+    }
+    if(!student.length) res.send("Couldn't find");
+    else res.send(student);
+});
+
+app.use('/rmstaffbyid/:id', async(req, res)=>{
+    let id = req.params.id;
+    let student;
+    try{
+        student = await staff.findOneAndDelete({eid:id});
+    }catch(err){
+        console.log(err);
+    }
+    res.send('Done');
+});
+
+app.use('/addStaff', (req, res)=>{
+    const {eid,dt,fname,lname,mail,mble,dept,edu,passwd} = req.body.studdata;
+    const St = new staff({
+        eid,dt,fname,lname,mail,mble,dept,edu,passwd
+    })
+    St.save()
+    return res.send({msg:'done',result:St})
+});
+
+app.get('/princelogdetails/:id', async(req, res)=>{
+    let id = req.params.id;
+    let prince;
+    try{
+        prince = await prinicipal.find({pid:id});
+    }catch(err){
+        console.log(err);
+    }
+    if(!prince) res.send("");
+    else res.send(prince);
+});
+
+app.use('/allstuds', async(req, res)=>{
+    let s;
+    try{
+        s = await studSchema.find();
+    }catch(err){
+        console.log(err);
+    }
+    res.send(s);
+});
+
+app.use('/allstaff', async(req, res)=>{
+    let s;
+    try{
+        s = await staff.find();
+    }catch(err){
+        console.log(err);
+    }
+    res.send(s);
+});
+
+app.use('/allhods', async(req, res)=>{
+    let s;
+    try{
+        s = await hodSchema.find();
+    }catch(err){
+        console.log(err);
+    }
+    res.send(s);
+});
+
+app.get('/alleavedet', async(req, res)=>{
+    let leave;
+    try{
+        leave = await leaveapps.find({status:'pending'});
+    }catch(err){
+        console.log(err);
+    }
+    res.send(leave);
+});

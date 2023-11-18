@@ -60,7 +60,7 @@ const Proctor = () => {
                         <label htmlFor='pass'>Password</label>
                         <input type='password' name='pass' className='card mb-2 px-2'  onChange={(e)=>setusr({...usr, pswd:e.target.value})} />
                         <Link to='../pages/staffpage' className='fs-6'>Forgot password</Link><br></br>
-                        <input type='submit' className='mt-2 btn btn-primary' value='Submit' />
+                        <input type='submit' className='mt-2 btn btn-primary' value='Login' />
                     </form>
                 </div>
             </div>
